@@ -2,7 +2,7 @@ import os
 from flask import Flask, jsonify, request
 from flask_sqlalchemy import SQLAlchemy
 from flask_marshmallow import Marshmallow
-from flask_cors import CORS, cross_origin
+from flask_cors import CORS
 
 
 app = Flask(__name__)
@@ -11,7 +11,6 @@ CORS(app)
 app.config["SQLALCHEMY_DATABASE_URI"] = 'sqlite:///blog.db'
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 app.config["UPLOAD_FOLDER"] = 'C:/test__react/FlaskReactMemes/backend/img'
-app.config['CORS_HEADERS'] = 'Content-Type'
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg'}
 
 db = SQLAlchemy(app)
@@ -51,7 +50,6 @@ def add_article():
 
 
 @app.route("/upload", methods = ['POST'])
-@cross_origin()
 def add_image():
     file = request.files['file']
     file.save(os.path.join(app.config['UPLOAD_FOLDER'], file.filename))
