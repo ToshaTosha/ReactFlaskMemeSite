@@ -1,9 +1,7 @@
 import os
 from flask import Flask, jsonify, request
 from flask_sqlalchemy import SQLAlchemy
-from flask_marshmallow import Marshmallow
 from flask_cors import CORS
-
 
 app = Flask(__name__)
 CORS(app)
@@ -14,8 +12,6 @@ app.config["UPLOAD_FOLDER"] = 'C:/test__react/FlaskReactMemes/backend/img'
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg'}
 
 db = SQLAlchemy(app)
-ma = Marshmallow(app)
-
 
 class Articles(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -24,29 +20,21 @@ class Articles(db.Model):
     def __init__(self, description):
         self.description = description
 
-class ArticleSchema(ma.Schema):
-    class Meta:
-        fields = ('add', 'description')
-
-article_schema = ArticleSchema()
-articles_schema = ArticleSchema(many=True)
-
 @app.route("/get", methods = ['GET'])
 def get_articles():
-    all_articles = Articles.query.all()
-    results = articles_schema.dump(all_articles)
-    return jsonify(results)
-    #return jsonify({"Hello":"World"})
+    session = db.session.connection()
+    results = session.execute("select * from articles").mappings().all()
+    row_as_dict = [dict(row) for row in results]
+    return jsonify(row_as_dict)
 
 
 @app.route("/add", methods = ['POST'])
 def add_article():
+    session = db.session.connection()
     description = request.json['description']
+    results = session.execute("insert into articles values (NULL, :desc)", {'desc': description})
 
-    articles = Articles(description)
-    db.session.add(articles)
-    db.session.commit()
-    return article_schema.jsonify(articles)
+    return jsonify( {'description': description} )
 
 
 @app.route("/upload", methods = ['POST'])
