@@ -43,7 +43,7 @@ with app.app_context():
 
 @app.route("/get", methods = ['GET'])
 def get_articles():
-    all_articles = Articles.query.all()
+    all_articles = Articles.query.order_by( Articles.id.desc() ).limit(20).all()
     results = articles_schema.dump(all_articles)
     return jsonify(results)
     #return jsonify({"Hello":"World"})
