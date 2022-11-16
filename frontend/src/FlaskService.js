@@ -3,14 +3,14 @@ export default class FlaskService {
     const data = new FormData();
     data.append("description", description);
     data.append("file", image);
-    return fetch("http://192.168.0.17:5000/add", {
+    return fetch("http://127.0.0.1:5000/add", {
       method: "POST",
       body: data
     }).then((resp) => resp.json());
   }
 
   static InsertLike(id) {
-    return fetch(`http://192.168.0.17:5000/like/${id}/`, {
+    return fetch(`http://127.0.0.1:5000/like/${id}/`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
