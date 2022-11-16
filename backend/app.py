@@ -61,7 +61,10 @@ def add_article():
         if file.filename.split(".")[-1] not in ALLOWED_EXTENSIONS:
             return "Bad extension", 500
 
-        file.save(os.path.join(app.config['UPLOAD_FOLDER'], file.filename))
+        path = os.path.join(app.config['UPLOAD_FOLDER'], file.filename)
+        file.save(path)
+
+        url = path
 
     articles = Articles(description, url)
     db.session.add(articles)
