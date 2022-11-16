@@ -22,4 +22,14 @@ export default class FlaskService {
       body: data,
     });
   }
+
+  static InsertLike(id) {
+    return fetch(`http://127.0.0.1:5000/like/${id}/`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(id),
+    }).then((resp) => resp.json());
+  }
 }

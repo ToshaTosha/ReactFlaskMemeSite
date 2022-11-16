@@ -14,17 +14,29 @@ function App() {
         setItems(arr);
       });
   }, []);
-  console.log(items);
+  //console.log(items);
   const onAddPost = (description) => {
+    //console.log(description);
     const newList = [...items, description];
     setItems(newList);
+  };
+
+  const updateLike = (like) => {
+    const new_like = items.map((my_like) => {
+      if (my_like.id === like.id) {
+        return like;
+      } else {
+        return my_like;
+      }
+    });
+    setItems(new_like);
   };
 
   return (
     <div className="App">
       <Form onAddPost={onAddPost} />
       {items.map((item, id) => (
-        <Posts key={id} item={item} />
+        <Posts key={id} item={item} updateLike={updateLike} />
       ))}
     </div>
   );

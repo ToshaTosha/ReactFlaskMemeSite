@@ -33,11 +33,20 @@
   font-weight: 700;
 }
 
-.description {
-
-}
-
 .image {
   width: 200px;
   padding: 10px 0px;
 }
+
+.like-container {
+  display: flex;
+  align-items: center;
+}
+
+.like {
+  background: transparent;
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
+
