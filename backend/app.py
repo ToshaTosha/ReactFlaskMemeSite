@@ -11,7 +11,7 @@ CORS(app)
 
 app.config["SQLALCHEMY_DATABASE_URI"] = 'sqlite:///blog.db'
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
-app.config["UPLOAD_FOLDER"] = 'C:/test__react/FlaskReactMemes/backend/img'
+app.config["UPLOAD_FOLDER"] = 'img/'
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg'}
 
 db = SQLAlchemy(app)
@@ -21,18 +21,25 @@ ma = Marshmallow(app)
 class Articles(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     description = db.Column(db.Text())
+    url = db.Column(db.Text())
     likes = db.Column(db.Integer, default = 0)
     date = db.Column(db.DateTime, default = datetime.datetime.now)
 
-    def __init__(self, description):
+    def __init__(self, description, url):
         self.description = description
+        self.url = url
 
 class ArticleSchema(ma.Schema):
     class Meta:
-        fields = ('id', 'description', 'likes', 'date')
+        fields = ('id', 'description', 'url', 'likes', 'date')
 
 article_schema = ArticleSchema()
 articles_schema = ArticleSchema(many=True)
+
+# Инициализация базы данных
+# Даже если blog.db был удалён, это восстановит его
+with app.app_context():
+    db.create_all()
 
 @app.route("/get", methods = ['GET'])
 def get_articles():
@@ -44,9 +51,19 @@ def get_articles():
 
 @app.route("/add", methods = ['POST'])
 def add_article():
-    description = request.json['description']
+    description = request.form['description']
 
-    articles = Articles(description)
+    url = None
+
+    if 'file' in request.files:
+        file = request.files['file']
+
+        if file.filename.split(".")[-1] not in ALLOWED_EXTENSIONS:
+            return "Bad extension", 500
+
+        file.save(os.path.join(app.config['UPLOAD_FOLDER'], file.filename))
+
+    articles = Articles(description, url)
     db.session.add(articles)
     db.session.commit()
     return article_schema.jsonify(articles)
@@ -60,15 +77,6 @@ def like_article(id):
     db.session.commit()
     return article_schema.jsonify(article)
 
-
-@app.route("/upload", methods = ['POST'])
-def add_image():
-    file = request.files['file']
-    file.save(os.path.join(app.config['UPLOAD_FOLDER'], file.filename))
-    #articles = Articles(description)
-    #db.session.add(articles)
-    #db.session.commit()
-    return "OK"
 
 if __name__ == "__main__":
     app.run(debug=True)

@@ -3,15 +3,11 @@ import FlaskService from "../FlaskService";
 
 export default function Form({ onAddPost }) {
   const [description, setDescription] = React.useState("");
-  const [img, setImg] = React.useState([]);
+  const [image, setImage] = React.useState([]);
   const handleClick = () => {
-    FlaskService.InsertArticle({ description })
+    FlaskService.InsertArticle(description, image)
       .then((resp) => onAddPost(resp))
       .catch((error) => console.error(error));
-  };
-  const handleClickImg = () => {
-    FlaskService.InsertImage(img);
-    //console.log(img);
   };
 
   return (
@@ -24,15 +20,12 @@ export default function Form({ onAddPost }) {
           onChange={(e) => setDescription(e.target.value)}
           placeholder="Введите..."
         />
-        <button className="button" onClick={() => handleClick(description)}>
-          Отправить!
-        </button>
         <input
-          onChange={(e) => setImg(e.target.files[0])}
+          onChange={(e) => setImage(e.target.files[0])}
           type="file"
           name="file"
         ></input>
-        <button className="button" onClick={() => handleClickImg(img)}>
+        <button className="button" onClick={() => handleClick(description, image)}>
           Отправить!
         </button>
       </div>
