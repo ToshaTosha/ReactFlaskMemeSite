@@ -17,7 +17,7 @@ function App() {
   //console.log(items);
   const onAddPost = (description) => {
     //console.log(description);
-    const newList = [description, ...items];
+    const newList = [...items, description];
     setItems(newList);
   };
 
