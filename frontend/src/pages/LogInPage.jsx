@@ -11,7 +11,7 @@ function Register() {
   const handlRegister = async (email, password) => {
     //console.log(email, password);
     try {
-      const resp = await Auth.post("http://127.0.0.1:5000/login", {
+      const resp = await Auth.post("http://192.168.0.17:5000/login", {
         email,
         password,
       });

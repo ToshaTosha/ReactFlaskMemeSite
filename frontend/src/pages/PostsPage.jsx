@@ -10,7 +10,7 @@ function PostsPage() {
   const { isAuth, setIsAuth } = React.useContext(Context);
   console.log(isAuth);
   React.useEffect(() => {
-    fetch("http://127.0.0.1:5000/get")
+    fetch("http://192.168.0.17:5000/get")
       .then((res) => {
         return res.json();
       })
@@ -22,7 +22,7 @@ function PostsPage() {
   React.useEffect(() => {
     (async () => {
       try {
-        const resp = await Auth.get("http://127.0.0.1:5000/@me");
+        const resp = await Auth.get("http://192.168.0.17:5000/@me");
         console.log(resp.data);
       } catch (error) {
         console.log("Not found");
