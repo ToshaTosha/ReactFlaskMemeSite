@@ -30,8 +30,6 @@ function PostsPage() {
     })();
   }, []);
 
-  if (isAuth === false) return (<Navigate replace to="/login" />);
-
   const onAddPost = (description) => {
     //console.log(description);
     const newList = [description, ...items];
@@ -48,14 +46,15 @@ function PostsPage() {
     });
     setItems(new_like);
   };
-
-  return (
+  return isAuth ? (
     <div>
       <Form onAddPost={onAddPost} />
       {items.map((item, id) => (
         <Posts key={id} item={item} updateLike={updateLike} />
       ))}
     </div>
+  ) : (
+    <Navigate replace to="/login" />
   );
 }
 
