@@ -40,6 +40,11 @@ class User(db.Model):
     email = db.Column(db.String(345), unique=True)
     password = db.Column(db.Text(), nullable=False)
 
+class Likes(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    article_id = db.Column(db.Integer)
+    user_id = db.Column(db.Integer)
+
 class ArticleSchema(ma.Schema):
     class Meta:
         fields = ('id', 'description', 'url', 'likes', 'date')
@@ -54,7 +59,6 @@ with app.app_context():
 
 @app.route("/@me")
 def get_user():
-    print(session)
     user_id = session.get("user_id")
 
     if not user_id:
@@ -138,9 +142,20 @@ def add_article():
 @app.route("/like/<id>/", methods = ['PUT']) 
 def like_article(id):
     article = Articles.query.get(id)
-    
+    user_id = session.get("user_id")
+
+    if not user_id:
+        return "unauthorized", 403
+
+    if not article:
+        return "id not found", 500
+
+    if Likes.query.filter_by(user_id=user_id, article_id=id).first() is not None:
+        return "already has your like", 500
+
     article.likes = article.likes + 1
-    
+    like = Likes(article_id=id, user_id=user_id)
+    db.session.add(like)
     db.session.commit()
     return article_schema.jsonify(article)
 

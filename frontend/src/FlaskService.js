@@ -26,6 +26,7 @@ export default class FlaskService {
       headers: {
         "Content-Type": "application/json",
       },
+      credentials: "include",
       body: JSON.stringify(id),
     }).then((resp) => resp.json());
   }
