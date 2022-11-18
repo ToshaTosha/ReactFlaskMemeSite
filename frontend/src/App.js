@@ -1,6 +1,6 @@
 import React from "react";
 //import { Routes, Route } from "react-router-dom";
-//import LogInPage from "./pages/LogInPage";
+import LogInPage from "./pages/LogInPage";
 import "./App.css";
 import PostsPage from "./pages/PostsPage";
 
@@ -10,9 +10,9 @@ function App() {
   const [isAuth, setIsAuth] = React.useState(false);
 
   const fetch_auth = function() {
-    fetch("http://192.168.0.17:5000/@me")
+    fetch("http://192.168.0.17:5000/@me", { credentials: "include" })
     .then(response => response.json())
-    .then(data => setIsAuth(true))
+    .then(data => setIsAuth(data.auth))
     .catch(error => alert("Не удалось обратиться к серверу. Проверьте, запущено ли Flask-приложение."));
   }
 
@@ -20,7 +20,7 @@ function App() {
 
   return (
     <div className="App">
-      { isAuth ? <div>OK</div> : <div>NOT OK</div> }
+      { isAuth ? <div>OK</div> : <LogInPage fetch_auth={fetch_auth} /> }
       <PostsPage />
     </div>
   );
