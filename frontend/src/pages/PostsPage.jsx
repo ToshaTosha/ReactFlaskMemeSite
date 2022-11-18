@@ -1,14 +1,10 @@
 import React from "react";
-import { Navigate } from "react-router-dom";
-import { Context } from "../context";
 import Form from "../components/Form";
 import Posts from "../components/Posts";
-import Auth from "../Auth";
 
 function PostsPage() {
   const [items, setItems] = React.useState([]);
-  const { isAuth, setIsAuth } = React.useContext(Context);
-  console.log(isAuth);
+
   React.useEffect(() => {
     fetch("http://192.168.0.17:5000/get")
       .then((res) => {
@@ -18,19 +14,6 @@ function PostsPage() {
         setItems(arr);
       });
   }, []);
-
-  React.useEffect(() => {
-    (async () => {
-      try {
-        const resp = await Auth.get("http://192.168.0.17:5000/@me");
-        console.log(resp.data);
-      } catch (error) {
-        console.log("Not found");
-      }
-    })();
-  }, []);
-
-  if (isAuth === false) return (<Navigate replace to="/login" />);
 
   const onAddPost = (description) => {
     //console.log(description);
