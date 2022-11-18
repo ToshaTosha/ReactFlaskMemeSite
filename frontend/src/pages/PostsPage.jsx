@@ -6,7 +6,7 @@ function PostsPage() {
   const [items, setItems] = React.useState([]);
 
   React.useEffect(() => {
-    fetch("http://192.168.0.17:5000/get")
+    fetch("http://127.0.0.1:5000/get")
       .then((res) => {
         return res.json();
       })

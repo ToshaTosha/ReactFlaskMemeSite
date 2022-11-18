@@ -10,7 +10,7 @@ function App() {
   const [isAuth, setIsAuth] = React.useState(false);
 
   const fetch_auth = function() {
-    fetch("http://192.168.0.17:5000/@me", { credentials: "include" })
+    fetch("http://127.0.0.1:5000/@me", { credentials: "include" })
     .then(response => response.json())
     .then(data => setIsAuth(data.auth))
     .catch(error => alert("Не удалось обратиться к серверу. Проверьте, запущено ли Flask-приложение."));

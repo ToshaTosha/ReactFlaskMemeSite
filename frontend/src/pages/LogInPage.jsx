@@ -17,7 +17,7 @@ function Register({fetch_auth}) {
 
   const handlRegister = function(email, password) {
     const data = {email, password};
-    fetch("http://192.168.0.17:5000/login",
+    fetch("http://127.0.0.1:5000/login",
     {
       method: "POST",
       headers: {
