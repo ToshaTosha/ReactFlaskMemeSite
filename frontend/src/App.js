@@ -13,7 +13,7 @@ function App() {
     fetch("http://192.168.0.17:5000/@me")
     .then(response => response.json())
     .then(data => setIsAuth(true))
-    .catch(error => setIsAuth(false));
+    .catch(error => alert("Не удалось обратиться к серверу. Проверьте, запущено ли Flask-приложение."));
   }
 
   fetch_auth();
