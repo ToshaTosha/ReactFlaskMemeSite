@@ -5,14 +5,12 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_marshmallow import Marshmallow
 from flask_cors import CORS
 from flask_bcrypt import Bcrypt
-from flask_session import Session
 
 
 app = Flask(__name__)
 CORS(app, supports_credentials=True)
 
-app.config['SESSION_TYPE'] = 'filesystem'
-
+app.config["SECRET_KEY"] = "abcdef"
 app.config["SQLALCHEMY_DATABASE_URI"] = 'sqlite:///blog.db'
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 app.config["UPLOAD_FOLDER"] = 'img/'
@@ -21,8 +19,6 @@ ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg'}
 db = SQLAlchemy(app)
 ma = Marshmallow(app)
 bcrypt = Bcrypt(app)
-server_session = Session(app)
-
 
 class Articles(db.Model):
     id = db.Column(db.Integer, primary_key=True)
