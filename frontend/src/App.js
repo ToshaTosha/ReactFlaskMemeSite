@@ -10,7 +10,7 @@ function App() {
   const [isAuth, setIsAuth] = React.useState();
 
   const fetch_auth = function () {
-    fetch("http://127.0.0.1:5000/@me", { credentials: "include" })
+    fetch("/@me", { credentials: "include" })
       .then((response) => response.json())
       .then((data) => console.log(data.auth))
       .catch((error) =>
