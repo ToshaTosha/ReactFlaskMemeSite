@@ -11,7 +11,31 @@ function Posts({ item, updateLike }) {
   };
   return (
     <div className="post-container">
-      <span className="user-name">Этот пользовтель сказал:</span>
+      <div class="tweet">
+        <img class="tweet__author-logo" src="" />
+        <div class="tweet__main">
+          <div class="tweet__header">
+            <div class="tweet__author-name">Name user</div>
+            <div class="tweet__author-slug">@i ne znau chto tut</div>
+            <div class="tweet__publish-time">{item.date}</div>
+          </div>
+          <div class="tweet__content">
+            {item.description}
+            <img
+              class="tweet__image"
+              src="https://static.mk.ru/upload/entities/2021/06/16/10/articles/facebookPicture/8b/b8/b5/f7/d5a31497c14d4e2bc37f26d7a9cf712d.jpg"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+export default Posts;
+
+/* 
+<span className="user-name">Этот пользовтель сказал:</span>
       <br />
       <span className="description">{item.description}</span>
       <br />
@@ -38,12 +62,4 @@ function Posts({ item, updateLike }) {
           </svg>
         </button>
       </div>
-    </div>
-  );
-}
-
-export default Posts;
-
-/* 
-
 */
