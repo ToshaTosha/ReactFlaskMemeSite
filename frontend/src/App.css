@@ -1,4 +1,6 @@
-
+body {
+  margin-top: 20px;
+}
 .brand {
   height: 28px;
   filter: invert(46%) sepia(99%) saturate(1449%) hue-rotate(176deg) brightness(100%) contrast(91%);
@@ -258,7 +260,7 @@
   text-decoration: none;
   color: #00a7ff;
   font-size: 20px;
-  padding: 8px 8px;
+  padding: 8px 13px;
   border-radius: 50%;
 }
 .option span a:hover {
@@ -280,56 +282,157 @@
   background: #0093ff;
 }
 
-/*
-.App {
-  margin: 0 auto;
-  margin-top: 20px;
-  width: 50%;
+
+.outline-btn{
+  background: white;
+  border: 1px solid #3498db;
+  border-radius: 1000px;
+  padding: 0.75rem 0.5rem;
+  color: #3498db;
+  font-weight: 1000;
 }
 
-.form input{
-  width: 100%;
-  height: 20px;
-  border-radius: 10px;
-  padding: 10px;
-}
-
-.button {
-  padding: 5px 10px;
-  margin: 10px 0px;
-  border-radius: 5px;
+.filled-btn{
+  background: #3498db;
   border: none;
-  font: inherit;
-  color: #fff;
-  background-color: #1faee9;
-  cursor: pointer;
+  border-radius: 1000px;
+  padding: 0.75rem;
+  color: white;
+  font-weight: 600;
 }
 
-.post-container {
-  background-color: #dbdbdb;
-  border-radius: 10px;
-  margin: 10px 0;
-  padding: 10px;
+.input-text{
+  background: white;
+  padding: 0.5rem 2.5rem 0.5rem 0.75rem;
+  margin-left: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
 }
 
-.user-name {
-  font-weight: 700;
-}
-
-.image {
-  width: 200px;
-  padding: 10px 0px;
-}
-
-.like-container {
+/* PAGES */
+.main-page{
   display: flex;
+  flex-direction: row;
+  height: 90vh;
+  color: white;
+  font-weight: 500;
+}
+
+.left{
+  display: flex;
+  flex: 1;
+  background: #1da1f2;
+  justify-content: center;
   align-items: center;
 }
 
-.like {
-  background: transparent;
+.content{
+/*   background: red; */
+  width: 60%;
+/*   border: 1px solid; */
+  padding: 10%;
+}
+
+.text{
+/*   background: red; */
+  margin-bottom: 1.5rem;
+}
+
+.text span{
+  margin-left: 1rem;
+}
+
+
+.right{
+  flex: 1;
+  color: black;
+  width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+    overflow: auto;
+  
+}
+
+.right .header{
+  display: inline-block;
+  padding: 1.5rem 3rem;
+}
+
+.signin{
+  display: flex;
+  flex-direction: column;
+  width: 60%;
+  margin: auto;
+}
+
+.signin .showcase h1{
+  font-size: 1.5rem;
+}
+
+.signin .showcase{
+  margin-bottom: 3rem;
+}
+
+.signin .btn-form{
+  display: flex;
+  flex-direction: column;
+}
+
+.signin h3{
+  font-size: 1rem;
+  margin-bottom: 1rem;
+}
+
+.signin button{
+  cursor: pointer;
+  margin-bottom: 1rem;
+  padding: 15px 0px;
   border: none;
-  outline: none;
+}
+
+
+.footer{
+  height: 10vh;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  margin: auto;
+}
+
+.footer ul{
+  display: flex;
+}
+
+.footer ul li{
+  font-size: 0.74rem;
+  margin: 0 1rem;
+  padding: 1rem 0 0 0;
+  color: #bbb;
+}
+
+.footer ul li a{
+  color: #bbb;
+}
+
+.auth-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.auth-form input {
+  border-radius: 1000px;
+  padding: 0.75rem;
+  font-weight: 600;
+  margin: 0 0px 20px 0;
+  background-color: #fff;
+}
+
+.form-upload {
+  display: none;
   cursor: pointer;
 }
-*/

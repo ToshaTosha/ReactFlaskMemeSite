@@ -1,6 +1,6 @@
 import os
 import datetime
-from flask import Flask, jsonify, request, session
+from flask import Flask, jsonify, request, session, send_from_directory
 from flask_sqlalchemy import SQLAlchemy
 from flask_marshmallow import Marshmallow
 from flask_cors import CORS
@@ -100,12 +100,17 @@ def login_user():
     if user is None:
         return jsonify({"result":"User not found"})
 
-    if not True: #bcrypt.check_password_hash(user.password, password):
+    if not bcrypt.check_password_hash(user.password, password):
         return jsonify({"result":"Bad password"})
 
     session["user_id"] = user.id
 
     return jsonify({"result":"OK"})
+
+@app.route("/logout", methods = ['POST'])
+def logout_user():
+    session.clear()
+    return "OK", 200
 
 @app.route("/get", methods = ['GET'])
 def get_articles():
@@ -114,6 +119,10 @@ def get_articles():
     return jsonify(results)
     #return jsonify({"Hello":"World"})
 
+
+@app.route("/img/<path:filename>", methods = ['GET'])
+def get_img(filename):
+    return send_from_directory(app.config["UPLOAD_FOLDER"], filename)
 
 @app.route("/add", methods = ['POST'])
 def add_article():

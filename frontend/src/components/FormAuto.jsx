@@ -4,7 +4,7 @@ function Form({ handleClick }) {
   const [email, setEmail] = React.useState("");
   const [pass, setPass] = React.useState("");
   return (
-    <div className="block">
+    <div className="auth-form">
       <input
         className="input"
         type="email"
@@ -19,8 +19,8 @@ function Form({ handleClick }) {
         onChange={(e) => setPass(e.target.value)}
         placeholder="password"
       />
-      <button className="button" onClick={() => handleClick(email, pass)}>
-        click here
+      <button className="filled-btn" onClick={() => handleClick(email, pass)}>
+        Войдите
       </button>
     </div>
   );

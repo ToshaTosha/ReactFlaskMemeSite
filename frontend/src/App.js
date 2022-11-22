@@ -7,12 +7,14 @@ import PostsPage from "./pages/PostsPage";
 import { Context } from "./context";
 
 function App() {
-  const [isAuth, setIsAuth] = React.useState();
+  const [isAuth, setIsAuth] = React.useState(false);
+
+  console.log(isAuth);
 
   const fetch_auth = function () {
     fetch("/@me", { credentials: "include" })
       .then((response) => response.json())
-      .then((data) => console.log(data.auth))
+      .then((data) => setIsAuth(data.auth))
       .catch((error) =>
         alert(
           "Не удалось обратиться к серверу. Проверьте, запущено ли Flask-приложение."
@@ -20,7 +22,9 @@ function App() {
       );
   };
 
-  fetch_auth();
+  React.useEffect(() => {
+    fetch_auth();
+  }, []);
 
   return (
     <div className="App">
