@@ -20,21 +20,28 @@ db = SQLAlchemy(app)
 ma = Marshmallow(app)
 bcrypt = Bcrypt(app)
 
+class User(db.Model):
+    __tablename__ = 'users'
+
+    id = db.Column(db.Integer, primary_key=True)
+    email = db.Column(db.String(345), unique=True)
+    password = db.Column(db.Text(), nullable=False)
+
 class Articles(db.Model):
+    __tablename__ = 'articles'
+
     id = db.Column(db.Integer, primary_key=True)
     description = db.Column(db.Text())
     url = db.Column(db.Text())
     likes = db.Column(db.Integer, default = 0)
     date = db.Column(db.DateTime, default = datetime.datetime.now)
+    author_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    author = db.relationship('User', backref=db.backref('articles'))
 
-    def __init__(self, description, url):
+    def __init__(self, description, url, author):
         self.description = description
         self.url = url
-
-class User(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    email = db.Column(db.String(345), unique=True)
-    password = db.Column(db.Text(), nullable=False)
+        self.author = author
 
 class Likes(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -43,7 +50,7 @@ class Likes(db.Model):
 
 class ArticleSchema(ma.Schema):
     class Meta:
-        fields = ('id', 'description', 'url', 'likes', 'date')
+        fields = ('id', 'description', 'url', 'likes', 'date', 'author.email')
 
 article_schema = ArticleSchema()
 articles_schema = ArticleSchema(many=True)
@@ -138,7 +145,14 @@ def add_article():
 
         url = path
 
-    articles = Articles(description, url)
+    user_id = session.get("user_id")
+
+    if not user_id:
+        return "Not authorized", 403
+
+    user = User.query.filter_by(id=user_id).first()
+
+    articles = Articles(description, url, user)
     db.session.add(articles)
     db.session.commit()
     return article_schema.jsonify(articles)
