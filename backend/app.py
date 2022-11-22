@@ -2,7 +2,6 @@ import os
 import datetime
 from flask import Flask, jsonify, request, session, send_from_directory
 from flask_sqlalchemy import SQLAlchemy
-from flask_marshmallow import Marshmallow
 from flask_cors import CORS
 from flask_bcrypt import Bcrypt
 
@@ -17,7 +16,6 @@ app.config["UPLOAD_FOLDER"] = 'img/'
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg'}
 
 db = SQLAlchemy(app)
-ma = Marshmallow(app)
 bcrypt = Bcrypt(app)
 
 class User(db.Model):
@@ -43,17 +41,13 @@ class Articles(db.Model):
         self.url = url
         self.author = author
 
+    def json(self):
+        return { "id": self.id, "description": self.description, "url": self.url, "likes": self.likes, "date": self.date, "author": self.author.email }
+
 class Likes(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     article_id = db.Column(db.Integer)
     user_id = db.Column(db.Integer)
-
-class ArticleSchema(ma.Schema):
-    class Meta:
-        fields = ('id', 'description', 'url', 'likes', 'date', 'author.email')
-
-article_schema = ArticleSchema()
-articles_schema = ArticleSchema(many=True)
 
 # Инициализация базы данных
 # Даже если blog.db был удалён, это восстановит его
@@ -119,7 +113,7 @@ def logout_user():
 @app.route("/get", methods = ['GET'])
 def get_articles():
     all_articles = Articles.query.order_by( Articles.id.desc() ).limit(20).all()
-    results = articles_schema.dump(all_articles)
+    results = [x.json() for x in all_articles]
     return jsonify(results)
     #return jsonify({"Hello":"World"})
 
@@ -152,10 +146,10 @@ def add_article():
 
     user = User.query.filter_by(id=user_id).first()
 
-    articles = Articles(description, url, user)
-    db.session.add(articles)
+    article = Articles(description, url, user)
+    db.session.add(article)
     db.session.commit()
-    return article_schema.jsonify(articles)
+    return jsonify( article.json() )
 
 @app.route("/like/<id>/", methods = ['PUT'])
 def like_article(id):
@@ -182,7 +176,7 @@ def like_article(id):
 
     db.session.commit()
 
-    return article_schema.jsonify(article)
+    return jsonify( article.json() )
 
 
 if __name__ == "__main__":
