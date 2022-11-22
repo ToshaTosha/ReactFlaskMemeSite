@@ -2,16 +2,51 @@ import React from "react";
 import FlaskService from "../FlaskService";
 
 function Posts({ item, updateLike }) {
+  //let dateTime = {item}
   const handleClickLike = () => {
-    if (item.likes <= 0) {
-      FlaskService.InsertLike(item.id)
-        .then((resp) => updateLike(resp))
-        .catch((error) => console.error(error));
-    }
+    FlaskService.InsertLike(item.id)
+      .then((resp) => updateLike(resp))
+      .catch((error) => console.error(error));
   };
   return (
     <div className="post-container">
-      <span className="user-name">Этот пользовтель сказал:</span>
+      <div class="tweet">
+        <img class="tweet__author-logo" src="" />
+        <div class="tweet__main">
+          <div class="tweet__header">
+            <div class="tweet__author-name">Name user</div>
+            <div class="tweet__author-slug">@i ne znau chto tut</div>
+            <div class="tweet__publish-time">{item.date}</div>
+          </div>
+          <div class="tweet__content">
+            {item.description}
+            <img class="tweet__image" src={item.url} />
+          </div>
+        </div>
+      </div>
+      <div className="like-container">
+        <span className="likes-counter">{item.likes}</span>
+        <button onClick={handleClickLike} className="like">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="16"
+            height="16"
+            fill={item.likes <= 0 ? "currentColor" : "red"}
+            className="bi bi-heart"
+            viewBox="0 0 16 16"
+          >
+            <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z" />
+          </svg>
+        </button>
+      </div>
+    </div>
+  );
+}
+
+export default Posts;
+
+/* 
+<span className="user-name">Этот пользовтель сказал:</span>
       <br />
       <span className="description">{item.description}</span>
       <br />
@@ -38,12 +73,4 @@ function Posts({ item, updateLike }) {
           </svg>
         </button>
       </div>
-    </div>
-  );
-}
-
-export default Posts;
-
-/* 
-
 */

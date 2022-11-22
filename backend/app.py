@@ -1,18 +1,16 @@
 import os
 import datetime
-from flask import Flask, jsonify, request, session
+from flask import Flask, jsonify, request, session, send_from_directory
 from flask_sqlalchemy import SQLAlchemy
 from flask_marshmallow import Marshmallow
 from flask_cors import CORS
 from flask_bcrypt import Bcrypt
-from flask_session import Session
 
 
 app = Flask(__name__)
 CORS(app, supports_credentials=True)
 
-app.config['SESSION_TYPE'] = 'filesystem'
-
+app.config["SECRET_KEY"] = "abcdef"
 app.config["SQLALCHEMY_DATABASE_URI"] = 'sqlite:///blog.db'
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 app.config["UPLOAD_FOLDER"] = 'img/'
@@ -21,8 +19,6 @@ ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg'}
 db = SQLAlchemy(app)
 ma = Marshmallow(app)
 bcrypt = Bcrypt(app)
-server_session = Session(app)
-
 
 class Articles(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -87,6 +83,8 @@ def register_user():
     db.session.add(new_user)
     db.session.commit()
 
+    session["user_id"] = new_user.id
+
     return jsonify({
         "id": new_user.id,
         "email": new_user.email
@@ -102,12 +100,17 @@ def login_user():
     if user is None:
         return jsonify({"result":"User not found"})
 
-    if not True: #bcrypt.check_password_hash(user.password, password):
+    if not bcrypt.check_password_hash(user.password, password):
         return jsonify({"result":"Bad password"})
 
     session["user_id"] = user.id
 
     return jsonify({"result":"OK"})
+
+@app.route("/logout", methods = ['POST'])
+def logout_user():
+    session.clear()
+    return "OK", 200
 
 @app.route("/get", methods = ['GET'])
 def get_articles():
@@ -116,6 +119,10 @@ def get_articles():
     return jsonify(results)
     #return jsonify({"Hello":"World"})
 
+
+@app.route("/img/<path:filename>", methods = ['GET'])
+def get_img(filename):
+    return send_from_directory(app.config["UPLOAD_FOLDER"], filename)
 
 @app.route("/add", methods = ['POST'])
 def add_article():
