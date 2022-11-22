@@ -14,6 +14,10 @@ body {
   max-width: 1200px;
 }
 
+.layout__main {
+  margin-right: 30px;
+}
+
 .layout__right-sidebar {
   position: fixed;
   width: 350px;
@@ -254,19 +258,39 @@ body {
 
 .option {
   margin: 5px 0px 5px 7px;
+  display: flex;
+  width: 50%;
+    align-items: center;
+    justify-content: space-between;
 }
 
 .option span a {
   text-decoration: none;
   color: #00a7ff;
   font-size: 20px;
-  padding: 8px 13px;
   border-radius: 50%;
 }
 .option span a:hover {
   background-color: #e1f5ff;
 }
 .add-some button {
+  margin: 0 30px 0 0;
+  padding: 10px 25px;
+  border-radius: 30px;
+  border: none;
+  font-size: 16px;
+  background: #1da0f2;
+  color: #fff;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.logout {
+  display: flex;
+  margin-top: 20px;
+}
+
+.logout button {
   margin: 0 30px 0 0;
   padding: 10px 25px;
   border-radius: 30px;

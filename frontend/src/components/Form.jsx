@@ -12,13 +12,12 @@ export default function Form({ onAddPost }) {
 
   return (
     <div>
-      <div className="message">
-        <img class="tweet__author-logo" src="" />
+      <div class="message">
         <span>
           <textarea
             maxlength="280"
             contenteditable="true"
-            className="textarea"
+            class="textarea"
             type="text"
             value={description}
             onChange={(e) => setDescription(e.target.value)}
@@ -26,8 +25,8 @@ export default function Form({ onAddPost }) {
           />
         </span>
       </div>
-      <div className="add-some">
-        <div className="option">
+      <div class="add-some">
+        <div class="option">
           <div class="image-upload">
             <label for="file-input">
               <svg
@@ -45,7 +44,7 @@ export default function Form({ onAddPost }) {
 
             <input
               onChange={(e) => setImage(e.target.files[0])}
-              className="form-upload"
+              class="form-upload"
               type="file"
               id="file-input"
               name="file"
@@ -100,10 +99,7 @@ export default function Form({ onAddPost }) {
             </a>
           </span>
         </div>
-        <button
-          className="button"
-          onClick={() => handleClick(description, image)}
-        >
+        <button class="button" onClick={() => handleClick(description, image)}>
           Tweet
         </button>
       </div>

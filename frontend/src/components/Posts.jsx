@@ -2,7 +2,9 @@ import React from "react";
 import FlaskService from "../FlaskService";
 
 function Posts({ item, updateLike }) {
-  //let dateTime = {item}
+  let date = new Date(item.date);
+  let brandNewDate =
+    date.getDay() + "." + date.getMonth() + "." + date.getFullYear();
   const handleClickLike = () => {
     FlaskService.InsertLike(item.id)
       .then((resp) => updateLike(resp))
@@ -11,12 +13,11 @@ function Posts({ item, updateLike }) {
   return (
     <div className="post-container">
       <div class="tweet">
-        <img class="tweet__author-logo" src="" />
         <div class="tweet__main">
           <div class="tweet__header">
             <div class="tweet__author-name">Name user</div>
             <div class="tweet__author-slug">@i ne znau chto tut</div>
-            <div class="tweet__publish-time">{item.date}</div>
+            <div class="tweet__publish-time">{brandNewDate}</div>
           </div>
           <div class="tweet__content">
             {item.description}

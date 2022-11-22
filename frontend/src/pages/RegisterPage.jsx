@@ -1,11 +1,14 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { Context } from "../context";
+import { Navigate } from "react-router-dom";
 import FormAuto from "../components/FormAuto";
 
-function Register({ fetch_auth }) {
+function Register() {
+  const { isAuth, setIsAuth } = React.useContext(Context);
   const handle_response = function (data) {
     if (data.result === "OK") {
-      fetch_auth();
+      setIsAuth(true);
     } else {
       alert("Не удлось авторизоваться. Сервер ответил: " + data.result);
     }
@@ -18,7 +21,7 @@ function Register({ fetch_auth }) {
 
   const handlRegister = function (email, password) {
     const data = { email, password };
-    fetch("/login", {
+    fetch("/register", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -31,7 +34,9 @@ function Register({ fetch_auth }) {
       .catch((error) => handle_error(error));
   };
 
-  return (
+  return isAuth ? (
+    <Navigate replace to="/" />
+  ) : (
     <div>
       <span>Зарегистрируйтесь</span>
       <FormAuto handleClick={handlRegister} />
