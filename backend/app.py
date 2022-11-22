@@ -42,12 +42,25 @@ class Articles(db.Model):
         self.author = author
 
     def json(self):
-        return { "id": self.id, "description": self.description, "url": self.url, "likes": self.likes, "date": self.date, "author": self.author.email }
+        user_id = session.get("user_id")
+
+        if not user_id:
+            liked_by_me = False
+        else:
+            uid_like_list = [x.user_id for x in self.like_list]
+            liked_by_me = user_id in uid_like_list
+
+        return { "id": self.id, "description": self.description, "url": self.url, "likes": self.likes, "date": self.date, "author": self.author.email, "liked_by_me": liked_by_me }
 
 class Likes(db.Model):
+    __tablename__ = 'likes'
+
     id = db.Column(db.Integer, primary_key=True)
-    article_id = db.Column(db.Integer)
-    user_id = db.Column(db.Integer)
+    article_id = db.Column(db.Integer, db.ForeignKey('articles.id'))
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+
+    user = db.relationship('User', backref=db.backref('likes'))
+    article = db.relationship('Articles', backref=db.backref('like_list'))
 
 # Инициализация базы данных
 # Даже если blog.db был удалён, это восстановит его
