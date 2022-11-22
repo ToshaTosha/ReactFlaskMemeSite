@@ -76,7 +76,7 @@ def register_user():
     user_exist = User.query.filter_by(email=email).first() is not None
 
     if user_exist:
-        return jsonify({"error":"This user already exists"}), 409
+        return jsonify({"result":"This email is already taken"}), 409
 
     hashed_password = bcrypt.generate_password_hash(password)
     new_user = User(email=email, password=hashed_password)
@@ -85,10 +85,7 @@ def register_user():
 
     session["user_id"] = new_user.id
 
-    return jsonify({
-        "id": new_user.id,
-        "email": new_user.email
-    })
+    return jsonify({"result":"OK"})
 
 @app.route("/login", methods = ['POST'])
 def login_user():
