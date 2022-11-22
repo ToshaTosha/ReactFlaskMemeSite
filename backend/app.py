@@ -146,7 +146,7 @@ def add_article():
     db.session.commit()
     return article_schema.jsonify(articles)
 
-@app.route("/like/<id>/", methods = ['PUT']) 
+@app.route("/like/<id>/", methods = ['PUT'])
 def like_article(id):
     article = Articles.query.get(id)
     user_id = session.get("user_id")
@@ -157,13 +157,20 @@ def like_article(id):
     if not article:
         return "id not found", 500
 
-    if Likes.query.filter_by(user_id=user_id, article_id=id).first() is not None:
-        return "already has your like", 500
+    like = Likes.query.filter_by(user_id=user_id, article_id=id).first()
 
-    article.likes = article.likes + 1
-    like = Likes(article_id=id, user_id=user_id)
-    db.session.add(like)
+    if like is not None:
+        # Удаление лайка
+        article.likes = article.likes - 1
+        db.session.delete(like)
+    else:
+        # Добавление лайка
+        article.likes = article.likes + 1
+        like = Likes(article_id=id, user_id=user_id)
+        db.session.add(like)
+
     db.session.commit()
+
     return article_schema.jsonify(article)
 
 
