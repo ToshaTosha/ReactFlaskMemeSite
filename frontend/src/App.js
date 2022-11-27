@@ -9,8 +9,6 @@ import { Context } from "./context";
 function App() {
   const [isAuth, setIsAuth] = React.useState(false);
 
-  console.log(isAuth);
-
   const fetch_auth = function () {
     fetch("/@me", { credentials: "include" })
       .then((response) => response.json())
@@ -43,13 +41,3 @@ function App() {
 }
 
 export default App;
-
-/*
-{isAuth ? <div>OK</div> : <LogInPage fetch_auth={fetch_auth} />}
-      <PostsPage />
-<Routes>
-  <Route path="/" element={<PostsPage/>} />
-  <Route path="/register" element={<RegisterPage />} />
-  <Route path="/login" element={<LoginPage />} />
-</Routes>
-*/

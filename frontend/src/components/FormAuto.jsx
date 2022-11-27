@@ -1,6 +1,6 @@
 import React from "react";
 
-function Form({ handleClick }) {
+function Form({ handleClick, title }) {
   const [email, setEmail] = React.useState("");
   const [pass, setPass] = React.useState("");
   return (
@@ -20,7 +20,7 @@ function Form({ handleClick }) {
         placeholder="password"
       />
       <button className="filled-btn" onClick={() => handleClick(email, pass)}>
-        Войдите
+        {title}
       </button>
     </div>
   );

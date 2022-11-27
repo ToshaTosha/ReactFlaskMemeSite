@@ -8,7 +8,7 @@ import RightSidebar from "../components/RightSidebar";
 
 function PostsPage() {
   const [items, setItems] = React.useState([]);
-  const { setIsAuth, isAuth } = React.useContext(Context);
+  const { isAuth } = React.useContext(Context);
 
   React.useEffect(() => {
     fetch("/get")
@@ -19,9 +19,8 @@ function PostsPage() {
         setItems(arr);
       });
   }, []);
-  console.log(items);
+
   const onAddPost = (description) => {
-    //console.log(description);
     const newList = [description, ...items];
     setItems(newList);
   };
@@ -36,6 +35,7 @@ function PostsPage() {
     });
     setItems(new_like);
   };
+  //console.log(items);
 
   return isAuth ? (
     <div className="layout">
@@ -65,17 +65,3 @@ function PostsPage() {
 }
 
 export default PostsPage;
-
-/*
-      <Form onAddPost={onAddPost} />
-return isAuth ? (
-    <div>
-      <Form onAddPost={onAddPost} />
-      {items.map((item, id) => (
-        <Posts key={id} item={item} updateLike={updateLike} />
-      ))}
-    </div>
-  ) : (
-    <Navigate replace to="/login" />
-  );
-*/

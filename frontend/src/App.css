@@ -1,6 +1,14 @@
 body {
   margin-top: 20px;
 }
+
+.brand-name {
+  display: flex;
+  align-items: center;
+  color: #1da0f2;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
 .brand {
   height: 28px;
   filter: invert(46%) sepia(99%) saturate(1449%) hue-rotate(176deg) brightness(100%) contrast(91%);
@@ -366,6 +374,25 @@ body {
   margin-left: 1rem;
 }
 
+.post-container {
+  margin-bottom: 20px;
+}
+
+.about-post {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 10px;
+}
+
+.about-post-item {
+  display: flex;
+  align-items: center;
+}
+
+.about-post-item svg{
+  margin-left: 10px;
+}
+
 
 .right{
   flex: 1;
@@ -405,6 +432,18 @@ body {
 .signin .btn-form{
   display: flex;
   flex-direction: column;
+}
+
+.btn-form {
+  text-align: center;
+}
+
+.btn-form a{
+  text-decoration: none;
+  color:black;
+  border: solid 4px #3498db;
+    padding: 10px 0px;
+    border-radius: 50px;
 }
 
 .signin h3{
@@ -460,3 +499,14 @@ body {
   display: none;
   cursor: pointer;
 }
+
+.like {
+  background: none;
+	color: inherit;
+	border: none;
+	padding: 0;
+	font: inherit;
+	cursor: pointer;
+	outline: inherit;
+}
+

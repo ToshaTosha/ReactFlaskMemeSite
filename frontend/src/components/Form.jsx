@@ -8,11 +8,12 @@ export default function Form({ onAddPost }) {
     FlaskService.InsertArticle(description, image)
       .then((resp) => onAddPost(resp))
       .catch((error) => console.error(error));
+    setDescription("");
   };
 
   return (
     <div>
-      <div class="message">
+      <div className="message">
         <span>
           <textarea
             maxlength="280"
@@ -25,15 +26,15 @@ export default function Form({ onAddPost }) {
           />
         </span>
       </div>
-      <div class="add-some">
-        <div class="option">
-          <div class="image-upload">
+      <div className="add-some">
+        <div className="option">
+          <div className="image-upload">
             <label for="file-input">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="16"
                 height="16"
-                fill="currentColor"
+                fill="#1da1f2"
                 class="bi bi-image"
                 viewBox="0 0 16 16"
               >
@@ -44,7 +45,7 @@ export default function Form({ onAddPost }) {
 
             <input
               onChange={(e) => setImage(e.target.files[0])}
-              class="form-upload"
+              className="form-upload"
               type="file"
               id="file-input"
               name="file"
@@ -99,15 +100,13 @@ export default function Form({ onAddPost }) {
             </a>
           </span>
         </div>
-        <button class="button" onClick={() => handleClick(description, image)}>
+        <button
+          className="button"
+          onClick={() => handleClick(description, image)}
+        >
           Tweet
         </button>
       </div>
     </div>
   );
 }
-
-/*
-
-        
-        */

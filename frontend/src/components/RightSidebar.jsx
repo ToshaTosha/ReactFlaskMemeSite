@@ -45,7 +45,10 @@ function RightSidebar() {
             <div class="who-to-follow__heading">Who to follow</div>
           </div>
           <div class="who-to-follow__block">
-            <img class="who-to-follow__author-logo" src="" />
+            <img
+              class="who-to-follow__author-logo"
+              src="https://lifeo.ru/wp-content/uploads/milie-kartinki-kotikiv-dlya-srisovki-53-min.jpg"
+            />
             <div class="who-to-follow__content">
               <div>
                 <div class="who-to-follow__author-name">Other user</div>

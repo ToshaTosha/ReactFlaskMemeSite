@@ -91,12 +91,16 @@ function Register({ fetch_auth }) {
         <div class="signin">
           <div class="showcase">
             <img src="" alt="" />
-            <h1>See what's happening in the world right now.</h1>
+            <h1>Узнайте что происходит в мире прямо сейчас.</h1>
           </div>
           <div class="signup">
-            <h3>Join Twitter today.</h3>
             <div class="btn-form">
-              <FormAuto handleClick={handlRegister} />
+              <FormAuto title="Войти" handleClick={handlRegister} />
+            </div>
+            <div class="btn-form">
+              <Link className="link-to" to="/register">
+                или зарегистрируйтесь
+              </Link>
             </div>
           </div>
         </div>
@@ -157,22 +161,8 @@ function Register({ fetch_auth }) {
           <li> &copy; 2019 Twitter</li>
         </ul>
       </div>
-
-      <Link className="link-to" to="/register">
-        Или Зарегистрируйтесь
-      </Link>
     </div>
   );
 }
 
 export default Register;
-
-/*
-
-<span>Войдите</span>
-      <FormAuto handleClick={handlRegister} />
-      <Link className="link-to" to="/register">
-        Или Зарегистрируйтесь
-      </Link>
-
-      */
