@@ -35,14 +35,13 @@ function PostsPage() {
     });
     setItems(new_like);
   };
-  //console.log(items);
 
   return isAuth ? (
     <div className="layout">
       <LeftSidebar />
-      <div class="layout__main">
+      <div className="layout__main">
         <div className="home-title">
-          <span>Home</span>
+          <span>Главная</span>
           <svg
             className="brand"
             xmlns="http://www.w3.org/2000/svg"

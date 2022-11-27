@@ -18,7 +18,7 @@ export default function Form({ onAddPost }) {
           <textarea
             maxlength="280"
             contenteditable="true"
-            class="textarea"
+            className="textarea"
             type="text"
             value={description}
             onChange={(e) => setDescription(e.target.value)}
@@ -35,7 +35,7 @@ export default function Form({ onAddPost }) {
                 width="16"
                 height="16"
                 fill="#1da1f2"
-                class="bi bi-image"
+                className="bi bi-image"
                 viewBox="0 0 16 16"
               >
                 <path d="M6.002 5.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z" />
@@ -59,7 +59,7 @@ export default function Form({ onAddPost }) {
                 width="16"
                 height="16"
                 fill="currentColor"
-                class="bi bi-filetype-gif"
+                className="bi bi-filetype-gif"
                 viewBox="0 0 16 16"
               >
                 <path
@@ -76,7 +76,7 @@ export default function Form({ onAddPost }) {
                 width="16"
                 height="16"
                 fill="currentColor"
-                class="bi bi-emoji-smile"
+                className="bi bi-emoji-smile"
                 viewBox="0 0 16 16"
               >
                 <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
@@ -91,7 +91,7 @@ export default function Form({ onAddPost }) {
                 width="16"
                 height="16"
                 fill="currentColor"
-                class="bi bi-calendar-week"
+                className="bi bi-calendar-week"
                 viewBox="0 0 16 16"
               >
                 <path d="M11 6.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm-3 0a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm-5 3a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm3 0a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1z" />

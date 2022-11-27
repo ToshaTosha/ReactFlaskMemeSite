@@ -38,28 +38,28 @@ function Register() {
     <Navigate replace to="/" />
   ) : (
     <div className="main-page">
-      <div class="left">
-        <div class="content">
-          <div class="text">
+      <div className="left">
+        <div className="content">
+          <div className="text">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="16"
               height="16"
               fill="currentColor"
-              class="bi bi-search"
+              className="bi bi-search"
               viewBox="0 0 16 16"
             >
               <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
             </svg>
             <span>Follow your interest.</span>
           </div>
-          <div class="text">
+          <div className="text">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="16"
               height="16"
               fill="currentColor"
-              class="bi bi-people-fill"
+              className="bi bi-people-fill"
               viewBox="0 0 16 16"
             >
               <path d="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1H7zm4-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
@@ -71,13 +71,13 @@ function Register() {
             </svg>
             <span>Hear what people are talking about.</span>
           </div>
-          <div class="text">
+          <div className="text">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="16"
               height="16"
               fill="currentColor"
-              class="bi bi-chat-left"
+              className="bi bi-chat-left"
               viewBox="0 0 16 16"
             >
               <path d="M14 1a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H4.414A2 2 0 0 0 3 11.586l-2 2V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12.793a.5.5 0 0 0 .854.353l2.853-2.853A1 1 0 0 1 4.414 12H14a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z" />
@@ -86,14 +86,14 @@ function Register() {
           </div>
         </div>
       </div>
-      <div class="right">
-        <div class="signin">
-          <div class="showcase">
+      <div className="right">
+        <div className="signin">
+          <div className="showcase">
             <img src="" alt="" />
             <h1>Узнайте что происходит в мире прямо сейчас.</h1>
           </div>
-          <div class="signup">
-            <div class="btn-form">
+          <div className="signup">
+            <div className="btn-form">
               <FormAuto title="Зарегистрируйтесь" handleClick={handlRegister} />
             </div>
             <div className="btn-form">
@@ -104,7 +104,7 @@ function Register() {
           </div>
         </div>
       </div>
-      <div class="footer">
+      <div className="footer">
         <ul>
           <li>
             <a href="#">About</a>
@@ -157,7 +157,7 @@ function Register() {
           <li>
             <a href="#">Settings</a>
           </li>
-          <li>2019 Twitter</li>
+          <li>&copy; 2022 Twitter</li>
         </ul>
       </div>
     </div>

@@ -12,15 +12,15 @@ function Posts({ item, updateLike }) {
   };
   return (
     <div className="post-container">
-      <div class="tweet">
-        <div class="tweet__main">
-          <div class="tweet__header">
-            <div class="tweet__author-name">{item.author}</div>
-            <div class="tweet__publish-time">{brandNewDate}</div>
+      <div className="tweet">
+        <div className="tweet__main">
+          <div className="tweet__header">
+            <div className="tweet__author-name">{item.author}</div>
+            <div className="tweet__publish-time">{brandNewDate}</div>
           </div>
-          <div class="tweet__content">
+          <div className="tweet__content">
             {item.description}
-            <img class="tweet__image" src={item.url} />
+            <img className="tweet__image" src={item.url} />
           </div>
         </div>
       </div>
@@ -33,7 +33,7 @@ function Posts({ item, updateLike }) {
               width="16"
               height="16"
               fill="currentColor"
-              class="bi bi-chat"
+              className="bi bi-chat"
               viewBox="0 0 16 16"
             >
               <path d="M2.678 11.894a1 1 0 0 1 .287.801 10.97 10.97 0 0 1-.398 2c1.395-.323 2.247-.697 2.634-.893a1 1 0 0 1 .71-.074A8.06 8.06 0 0 0 8 14c3.996 0 7-2.807 7-6 0-3.192-3.004-6-7-6S1 4.808 1 8c0 1.468.617 2.83 1.678 3.894zm-.493 3.905a21.682 21.682 0 0 1-.713.129c-.2.032-.352-.176-.273-.362a9.68 9.68 0 0 0 .244-.637l.003-.01c.248-.72.45-1.548.524-2.319C.743 11.37 0 9.76 0 8c0-3.866 3.582-7 8-7s8 3.134 8 7-3.582 7-8 7a9.06 9.06 0 0 1-2.347-.306c-.52.263-1.639.742-3.468 1.105z" />
@@ -48,7 +48,7 @@ function Posts({ item, updateLike }) {
               width="16"
               height="16"
               fill="currentColor"
-              class="bi bi-repeat"
+              className="bi bi-repeat"
               viewBox="0 0 16 16"
             >
               <path d="M11 5.466V4H5a4 4 0 0 0-3.584 5.777.5.5 0 1 1-.896.446A5 5 0 0 1 5 3h6V1.534a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384l-2.36 1.966a.25.25 0 0 1-.41-.192Zm3.81.086a.5.5 0 0 1 .67.225A5 5 0 0 1 11 13H5v1.466a.25.25 0 0 1-.41.192l-2.36-1.966a.25.25 0 0 1 0-.384l2.36-1.966a.25.25 0 0 1 .41.192V12h6a4 4 0 0 0 3.585-5.777.5.5 0 0 1 .225-.67Z" />
@@ -78,7 +78,7 @@ function Posts({ item, updateLike }) {
               width="16"
               height="16"
               fill="currentColor"
-              class="bi bi-upload"
+              className="bi bi-upload"
               viewBox="0 0 16 16"
             >
               <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z" />
